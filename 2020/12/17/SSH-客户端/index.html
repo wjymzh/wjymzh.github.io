@@ -18,14 +18,18 @@
   
   
   <title>SSH 客户端 | Zather&#39;s Blog</title>
-  <meta property="og:type" content="article">
+  <meta name="description" content="1.简介OpenSSH 的客户端是二进制程序 ssh。它在 Linux&#x2F;Unix 系统的位置是&#x2F;usr&#x2F;local&#x2F;bin&#x2F;ssh，Windows 系统的位置是\Program Files\OpenSSH\bin\ssh.exe。Linux 系统一般都自带 ssh，如果没有就需要安装。 12345# Ubuntu 和 Debian$ sudo apt install openssh-client#">
+<meta property="og:type" content="article">
 <meta property="og:title" content="SSH 客户端">
 <meta property="og:url" content="http://wjymzh.github.io/2020/12/17/SSH-%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
 <meta property="og:site_name" content="Zather">
+<meta property="og:description" content="1.简介OpenSSH 的客户端是二进制程序 ssh。它在 Linux&#x2F;Unix 系统的位置是&#x2F;usr&#x2F;local&#x2F;bin&#x2F;ssh，Windows 系统的位置是\Program Files\OpenSSH\bin\ssh.exe。Linux 系统一般都自带 ssh，如果没有就需要安装。 12345# Ubuntu 和 Debian$ sudo apt install openssh-client#">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-16T16:45:09.000Z">
-<meta property="article:modified_time" content="2020-12-16T16:45:09.403Z">
+<meta property="article:modified_time" content="2020-12-19T08:43:37.490Z">
 <meta property="article:author" content="Zather">
+<meta property="article:tag" content="SSH">
+<meta property="article:tag" content="安全，协议">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="http://wjymzh.github.io/2020/12/17/SSH-%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
@@ -178,7 +182,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSH/">SSH</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -188,7 +192,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">MySQL，数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E9%80%9F/" rel="tag">加速</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" rel="tag">安全配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">MySQL，数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E9%80%9F/" rel="tag">加速</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" rel="tag">安全配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%EF%BC%8C%E5%8D%8F%E8%AE%AE/" rel="tag">安全，协议</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -198,7 +202,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/ES6/" style="font-size: 13px;">ES6</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 14px;">MySQL，数据库</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/XSS/" style="font-size: 13px;">XSS</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13px;">前端</a> <a href="/tags/%E5%8A%A0%E9%80%9F/" style="font-size: 13px;">加速</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 14px;">安全</a> <a href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" style="font-size: 13px;">安全配置</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 14px;">运维</a>
+      <a href="/tags/ES6/" style="font-size: 13px;">ES6</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 13px;">Linux</a> <a href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 14px;">MySQL，数据库</a> <a href="/tags/SSH/" style="font-size: 14px;">SSH</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/XSS/" style="font-size: 13px;">XSS</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13px;">前端</a> <a href="/tags/%E5%8A%A0%E9%80%9F/" style="font-size: 13px;">加速</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 14px;">安全</a> <a href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" style="font-size: 13px;">安全配置</a> <a href="/tags/%E5%AE%89%E5%85%A8%EF%BC%8C%E5%8D%8F%E8%AE%AE/" style="font-size: 14px;">安全，协议</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 14px;">运维</a>
     </div>
   </div>
 
@@ -327,7 +331,17 @@
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/SSH/">SSH</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/SSH/" rel="tag">SSH</a>, <a class="article-tag-link-link" href="/tags/%E5%AE%89%E5%85%A8%EF%BC%8C%E5%8D%8F%E8%AE%AE/" rel="tag">安全，协议</a>
+  </span>
+
 
         
 
@@ -337,7 +351,97 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>OpenSSH 的客户端是二进制程序 ssh。它在 Linux/Unix 系统的位置是/usr/local/bin/ssh，Windows 系统的位置是\Program Files\OpenSSH\bin\ssh.exe。<br>Linux 系统一般都自带 ssh，如果没有就需要安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu 和 Debian</span></span><br><span class="line">$ sudo apt install openssh-client</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS 和 Fedora</span></span><br><span class="line">$ sudo dnf install openssh-clients</span><br></pre></td></tr></table></figure>
+<p>安装以后，可以使用-h参数，查看一下是否安装成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -h</span><br></pre></td></tr></table></figure>
+<h1 id="2-基本用法"><a href="#2-基本用法" class="headerlink" title="2.基本用法"></a>2.基本用法</h1><p>ssh 最常见的用途就是登录服务器，这要求服务器安装并正在运行 SSH 服务器软件。</p>
+<p>ssh 登录服务器的命令如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh hostname</span><br></pre></td></tr></table></figure>
+<p>上面命令中，hostname是主机名，它可以是域名，也可能是 IP 地址或局域网内部的主机名。不指定用户名的情况下，将使用客户端的当前用户名，作为远程服务器的登录用户名。如果要指定用户名，可以采用下面的语法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh user@hostname</span><br></pre></td></tr></table></figure>
+<p>上面的命令中，用户名和主机名写在一起了，之间使用@分隔。</p>
+<p>用户名也可以使用ssh的-l参数指定，这样的话，用户名和主机名就不用写在一起了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -l username host</span><br></pre></td></tr></table></figure>
+<p>ssh 默认连接服务器的22端口，-p参数可以指定其他端口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -p 8821 foo.com</span><br></pre></td></tr></table></figure>
+<p>上面命令连接服务器foo.com的8821端口。</p>
+<h1 id="3-连接流程"><a href="#3-连接流程" class="headerlink" title="3.连接流程"></a>3.连接流程</h1><p>ssh 连接远程服务器后，首先有一个验证过程，验证远程服务器是否为陌生地址。</p>
+<p>如果是第一次连接某一台服务器，命令行会显示一段文字，表示不认识这台机器，提醒用户确认是否需要连接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host <span class="string">&#x27;foo.com (192.168.121.111)&#x27;</span> can<span class="string">&#x27;t be established.</span></span><br><span class="line"><span class="string">ECDSA key fingerprint is SHA256:Vybt22mVXuNuB5unE++yowF7lgA/9/2bLSiO3qmYWBY.</span></span><br><span class="line"><span class="string">Are you sure you want to continue connecting (yes/no)?</span></span><br></pre></td></tr></table></figure>
+<p>上面这段文字告诉用户，foo.com这台服务器的指纹是陌生的，让用户选择是否要继续连接（输入 yes 或 no）。</p>
+<p>所谓“服务器指纹”，指的是 SSH 服务器公钥的哈希值。每台 SSH 服务器都有唯一一对密钥，用于跟客户端通信，其中公钥的哈希值就可以用来识别服务器。</p>
+<p>下面的命令可以查看某个公钥的指纹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -l -f /etc/ssh/ssh_host_ecdsa_key.pub</span><br><span class="line">256 da:24:43:0b:2e:c1:3f:a1:84:13:92:01:52:b4:84:ff   (ECDSA)</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，ssh-keygen -l -f命令会输出公钥/etc/ssh/ssh_host_ecdsa_key.pub的指纹。</p>
+<p>ssh 会将本机连接过的所有服务器公钥的指纹，都储存在本机的~/.ssh/known_hosts文件中。每次连接服务器时，通过该文件判断是否为陌生主机（陌生公钥）。</p>
+<p>在上面这段文字后面，输入yes，就可以将当前服务器的指纹也储存在本机~/.ssh/known_hosts文件中，并显示下面的提示。以后再连接的时候，就不会再出现警告了.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning: Permanently added <span class="string">&#x27;foo.com (192.168.121.111)&#x27;</span> (RSA) to the list of known hosts</span><br></pre></td></tr></table></figure>
+<p>然后，客户端就会跟服务器建立连接。接着，ssh 就会要求用户输入所要登录账户的密码。用户输入并验证密码正确以后，就能登录远程服务器的 Shell 了。</p>
+<h1 id="4-服务器密钥变更"><a href="#4-服务器密钥变更" class="headerlink" title="4.服务器密钥变更"></a>4.服务器密钥变更</h1><p>服务器指纹可以防止有人恶意冒充远程主机。如果服务器的密钥发生变更（比如重装了 SSH 服务器），客户端再次连接时，就会发生公钥指纹不吻合的情况。这时，客户端就会中断连接，并显示一段警告信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that the RSA host key has just been changed.</span><br><span class="line">The fingerprint <span class="keyword">for</span> the RSA key sent by the remote host is</span><br><span class="line">77:a5:69:81:9b:eb:40:76:7b:13:04:a9:6c:f4:9c:5d.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key <span class="keyword">in</span> /home/me/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending key <span class="keyword">in</span> /home/me/.ssh/known_hosts:36</span><br></pre></td></tr></table></figure>
+<p>上面这段文字的意思是，该主机的公钥指纹跟~/.ssh/known_hosts文件储存的不一样，必须处理以后才能连接。这时，你需要确认是什么原因，使得公钥指纹发生变更，到底是恶意劫持，还是管理员变更了 SSH 服务器公钥。</p>
+<p>如果新的公钥确认可以信任，需要继续执行连接，你可以执行下面的命令，将原来的公钥指纹从~/.ssh/known_hosts文件删除。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -R hostname</span><br></pre></td></tr></table></figure>
+<p>上面命令中，hostname是发生公钥变更的主机名。<br>除了使用上面的命令，你也可以手工修改known_hosts文件，将公钥指纹删除。<br>删除了原来的公钥指纹以后，重新执行 ssh 命令连接远程服务器，将新的指纹加入known_hosts文件，就可以顺利连接了。</p>
+<h1 id="5-执行远程命令"><a href="#5-执行远程命令" class="headerlink" title="5.执行远程命令"></a>5.执行远程命令</h1><p>SSH 登录成功后，用户就进入了远程主机的命令行环境，所看到的提示符，就是远程主机的提示符。这时，你就可以输入想要在远程主机执行的命令。</p>
+<p>另一种执行远程命令的方法，是将命令直接写在ssh命令的后面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh username@hostname <span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+<p>上面的命令会使得 SSH 在登录成功后，立刻在远程主机上执行命令command。</p>
+<p>下面是一个例子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh foo@server.example.com cat /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>上面的命令会在登录成功后，立即远程执行命令cat /etc/hosts。</p>
+<p>采用这种语法执行命令时，ssh 客户端不会提供互动式的 Shell 环境，而是直接远程命令的执行结果输出在命令行。但是，有些命令需要互动式的 Shell 环境，这时就要使用-t参数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 报错</span></span><br><span class="line">$ ssh remote.server.com emacs</span><br><span class="line">emacs: standard input is not a tty</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不报错</span></span><br><span class="line">$ ssh -t server.example.com emacs</span><br></pre></td></tr></table></figure>
+<p>上面代码中，emacs命令需要一个互动式 Shell，所以报错。只有加上-t参数，ssh 才会分配一个互动式 Shell。</p>
+<h1 id="6-加密参数"><a href="#6-加密参数" class="headerlink" title="6.加密参数"></a>6.加密参数</h1><p>SSH 连接的握手阶段，客户端必须跟服务端约定加密参数集（cipher suite）。</p>
+<p>加密参数集包含了若干不同的加密参数，它们之间使用下划线连接在一起，下面是一个例子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TLS_RSA_WITH_AES_128_CBC_SHA</span><br></pre></td></tr></table></figure>
+<p>它的含义如下。</p>
+<ul>
+<li>TLS：协议</li>
+<li>RSA：密钥交换算法</li>
+<li>AES：加密算法</li>
+<li>128：加密强度</li>
+<li>CBC：加密模式</li>
+<li>SHA：数字签名的 Hash 函数</li>
+</ul>
+<p>下面是一个例子，客户端向服务器发出的握手信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Handshake protocol: ClientHello</span><br><span class="line">    Version: TLS 1.2</span><br><span class="line">    Random</span><br><span class="line">        Client time: May 22, 2030 02:43:46 GMT</span><br><span class="line">        Random bytes: b76b0e61829557eb4c611adfd2d36eb232dc1332fe29802e321ee871</span><br><span class="line">    Session ID: (empty)</span><br><span class="line">    Cipher Suites</span><br><span class="line">        Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256”</span><br><span class="line">        Suite: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256</span><br><span class="line">        Suite: TLS_RSA_WITH_AES_128_GCM_SHA256</span><br><span class="line">        Suite: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</span><br><span class="line">        Suite: TLS_DHE_RSA_WITH_AES_128_CBC_SHA</span><br><span class="line">        Suite: TLS_RSA_WITH_AES_128_CBC_SHA</span><br><span class="line">        Suite: TLS_RSA_WITH_3DES_EDE_CBC_SHA</span><br><span class="line">        Suite: TLS_RSA_WITH_RC4_128_SHA</span><br><span class="line">    Compression methods</span><br><span class="line">        Method: null</span><br><span class="line">    Extensions</span><br><span class="line">        Extension: server_name</span><br><span class="line">            Hostname: www.feistyduck.com</span><br><span class="line">        Extension: renegotiation_info</span><br><span class="line">        Extension: elliptic_curves</span><br><span class="line">            Named curve: secp256r1</span><br><span class="line">            Named curve: secp384r1</span><br><span class="line">        Extension: signature_algorithms</span><br><span class="line">            Algorithm: sha1/rsa</span><br><span class="line">            Algorithm: sha256/rsa</span><br><span class="line">            Algorithm: sha1/ecdsa</span><br><span class="line">            Algorithm: sha256/ecdsa”</span><br></pre></td></tr></table></figure>
+<p>上面的握手信息（ClientHello）之中，Cipher Suites字段就是客户端列出可选的加密参数集，服务器在其中选择一个自己支持的参数集。</p>
+<p>服务器选择完毕之后，向客户端发出回应。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Handshake protocol: ServerHello</span><br><span class="line">    Version: TLS 1.2</span><br><span class="line">    Random</span><br><span class="line">        Server time: Mar 10, 2059 02:35:57 GMT”</span><br><span class="line">        Random bytes: 8469b09b480c1978182ce1b59290487609f41132312ca22aacaf5012</span><br><span class="line">    Session ID: 4cae75c91cf5adf55f93c9fb5dd36d19903b1182029af3d527b7a42ef1c32c80</span><br><span class="line">    Cipher Suite: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</span><br><span class="line">    Compression method: null</span><br><span class="line">    Extensions</span><br><span class="line">        Extension: server_name</span><br><span class="line">        Extension: renegotiation_info”</span><br></pre></td></tr></table></figure>
+<p>上面的回应信息（ServerHello）中，Cipher Suite字段就是服务器最终选定的加密参数。</p>
+<h1 id="7-ssh-命令行配置项"><a href="#7-ssh-命令行配置项" class="headerlink" title="7.ssh 命令行配置项"></a>7.ssh 命令行配置项</h1><p>ssh 命令有很多配置项，修改它的默认行为。<br>-c<br>-c参数指定加密算法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -c blowfish,3des server.example.com</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">$ ssh -c blowfish -c 3des server.example.com</span><br></pre></td></tr></table></figure>
+<p>上面命令指定使用加密算法blowfish或3des。<br>-C<br>-C参数表示压缩数据传输。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -C server.example.com</span><br></pre></td></tr></table></figure>
+<p>-d<br>-d参数设置打印的 debug 信息级别，数值越高，输出的内容越详细。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh –d 1 foo.com</span><br></pre></td></tr></table></figure>
+<p>-D<br>-D参数指定本机的 Socks 监听端口，该端口收到的请求，都将转发到远程的 SSH 主机，又称动态端口转发，详见《端口转发》一章。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -D 1080 server</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://wangdoc.com/ssh/client.html">详细命令传送门</a></p>
+<h1 id="8-客户端配置文件"><a href="#8-客户端配置文件" class="headerlink" title="8.客户端配置文件"></a>8.客户端配置文件</h1><h2 id="8-1位置"><a href="#8-1位置" class="headerlink" title="8.1位置"></a>8.1位置</h2><p>SSH 客户端的全局配置文件是/etc/ssh/ssh_config，用户个人的配置文件在~/.ssh/config，优先级高于全局配置文件。</p>
+<p>除了配置文件，~/.ssh目录还有一些用户个人的密钥文件和其他文件。下面是其中一些常见的文件。</p>
+<ul>
+<li>~/.ssh/id_ecdsa：用户的 ECDSA 私钥。</li>
+<li>~/.ssh/id_ecdsa.pub：用户的 ECDSA 公钥。</li>
+<li>~/.ssh/id_rsa：用于 SSH 协议版本2 的 RSA 私钥。</li>
+<li>~/.ssh/id_rsa.pub：用于SSH 协议版本2 的 RSA 公钥。</li>
+<li>~/.ssh/identity：用于 SSH 协议版本1 的 RSA 私钥。</li>
+<li>~/.ssh/identity.pub：用于 SSH 协议版本1 的 RSA 公钥。</li>
+<li>~/.ssh/known_hosts：包含 SSH 服务器的公钥指纹。<h2 id="8-2主机设置"><a href="#8-2主机设置" class="headerlink" title="8.2主机设置"></a>8.2主机设置</h2>用户个人的配置文件~/.ssh/config，可以按照不同服务器，列出各自的连接参数，从而不必每一次登录都输入重复的参数。下面是一个例子。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">     Port 2222</span><br><span class="line">Host remoteserver</span><br><span class="line">     HostName remote.example.com</span><br><span class="line">     User neo</span><br><span class="line">     Port 2112</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上面代码中，Host *表示对所有主机生效，后面的Port 2222表示所有主机的默认连接端口都是2222，这样就不用在登录时特别指定端口了。这里的缩进并不是必需的，只是为了视觉上，易于识别针对不同主机的设置。</p>
+<p>后面的Host remoteserver表示，下面的设置只对主机remoteserver生效。remoteserver只是一个别名，具体的主机由HostName命令指定，User和Port这两项分别表示用户名和端口。这里的Port会覆盖上面Host *部分的Port设置。</p>
+<p>以后，登录remote.example.com时，只要执行ssh remoteserver命令，就会自动套用 config 文件里面指定的参数。<br>单个主机的配置格式如下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh remoteserver</span><br><span class="line"><span class="comment"># 等同于</span></span><br><span class="line">$ ssh -p 2112 neo@remote.example.com</span><br></pre></td></tr></table></figure>
+<h2 id="8-3配置命令的语法"><a href="#8-3配置命令的语法" class="headerlink" title="8.3配置命令的语法"></a>8.3配置命令的语法</h2><p>ssh 客户端配置文件的每一行，就是一个配置命令。配置命令与对应的值之间，可以使用空格，也可以使用等号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Compression yes</span><br><span class="line"><span class="comment"># 等同于</span></span><br><span class="line">Compression = yes</span><br></pre></td></tr></table></figure>
+<p>#开头的行表示注释，会被忽略。空行等同于注释。</p>
+<h2 id="8-4主要配置命令"><a href="#8-4主要配置命令" class="headerlink" title="8.4主要配置命令"></a>8.4主要配置命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">下面是 ssh 客户端的一些主要配置命令，以及它们的范例值。</span><br><span class="line"></span><br><span class="line">    AddressFamily inet：表示只使用 IPv4 协议。如果设为inet6，表示只使用 IPv6 协议。</span><br><span class="line">    BindAddress 192.168.10.235：指定本机的 IP 地址（如果本机有多个 IP 地址）。</span><br><span class="line">    CheckHostIP yes：检查 SSH 服务器的 IP 地址是否跟公钥数据库吻合。</span><br><span class="line">    Ciphers blowfish,3des：指定加密算法。</span><br><span class="line">    Compression yes：是否压缩传输信号。</span><br><span class="line">    ConnectionAttempts 10：客户端进行连接时，最大的尝试次数。</span><br><span class="line">    ConnectTimeout 60：客户端进行连接时，服务器在指定秒数内没有回复，则中断连接尝试。</span><br><span class="line">    DynamicForward 1080：指定动态转发端口。</span><br><span class="line">    GlobalKnownHostsFile /users/smith/.ssh/my_global_hosts_file：指定全局的公钥数据库文件的位置。</span><br><span class="line">    Host server.example.com：指定连接的域名或 IP 地址，也可以是别名，支持通配符。Host命令后面的所有配置，都是针对该主机的，直到下一个Host命令为止。</span><br><span class="line">    HostKeyAlgorithms ssh-dss,ssh-rsa：指定密钥算法，优先级从高到低排列。</span><br><span class="line">    HostName myserver.example.com：在Host命令使用别名的情况下，HostName指定域名或 IP 地址。</span><br><span class="line">    IdentityFile keyfile：指定私钥文件。</span><br><span class="line">    LocalForward 2001 localhost:143：指定本地端口转发。</span><br><span class="line">    LogLevel QUIET：指定日志详细程度。如果设为QUIET，将不输出大部分的警告和提示。</span><br><span class="line">    MACs hmac-sha1,hmac-md5：指定数据校验算法。</span><br><span class="line">    NumberOfPasswordPrompts 2：密码登录时，用户输错密码的最大尝试次数。</span><br><span class="line">    PasswordAuthentication no：指定是否支持密码登录。不过，这里只是客户端禁止，真正的禁止需要在 SSH 服务器设置。</span><br><span class="line">    Port 2035：指定客户端连接的 SSH 服务器端口。</span><br><span class="line">    PreferredAuthentications publickey,hostbased,password：指定各种登录方法的优先级。</span><br><span class="line">    Protocol 2：支持的 SSH 协议版本，多个版本之间使用逗号分隔。</span><br><span class="line">    PubKeyAuthentication yes：是否支持密钥登录。这里只是客户端设置，还需要在 SSH 服务器进行相应设置。</span><br><span class="line">    RemoteForward 2001 server:143：指定远程端口转发。</span><br><span class="line">    SendEnv COLOR：SSH 客户端向服务器发送的环境变量名，多个环境变量之间使用空格分隔。环境变量的值从客户端当前环境中拷贝。</span><br><span class="line">    ServerAliveCountMax 3：如果没有收到服务器的回应，客户端连续发送多少次keepalive信号，才断开连接。该项默认值为3。</span><br><span class="line">    ServerAliveInterval 300：客户端建立连接后，如果在给定秒数内，没有收到服务器发来的消息，客户端向服务器发送keepalive消息。如果不希望客户端发送，这一项设为0。</span><br><span class="line">    StrictHostKeyChecking yes：yes表示严格检查，服务器公钥为未知或发生变化，则拒绝连接。no表示如果服务器公钥未知，则加入客户端公钥数据库，如果公钥发生变化，不改变客户端公钥数据库，输出一条警告，依然允许连接继续进行。ask（默认值）表示询问用户是否继续进行。</span><br><span class="line">    TCPKeepAlive yes：客户端是否定期向服务器发送keepalive信息。</span><br><span class="line">    User userName：指定远程登录的账户名。</span><br><span class="line">    UserKnownHostsFile /users/smith/.ssh/my_local_hosts_file：指定当前用户的known_hosts文件（服务器公钥指纹列表）的位置。</span><br><span class="line">    VerifyHostKeyDNS yes：是否通过检查 SSH 服务器的 DNS 记录，确认公钥指纹是否与known_hosts文件保存的一致。</span><br></pre></td></tr></table></figure>
       
     </div>
     <div class="article-footer">
