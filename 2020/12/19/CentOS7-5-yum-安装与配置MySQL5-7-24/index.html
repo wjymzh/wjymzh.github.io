@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>CentOS7.5 yum 安装与配置MySQL5.7.24 | Zather&#39;s Blog</title>
+  <meta name="description" content="安装环境：CentOS7 64位 MINI版，安装MySQL5.7 1、配置YUM源在MySQL官网中下载YUM源rpm安装包：https:&#x2F;&#x2F;dev.mysql.com&#x2F;downloads&#x2F;repo&#x2F;yum&#x2F; 下面已经提供一个YUM源安装包,如果不需要特定版本可直接使用我提供的5.7.24版本 12345# 下载mysql源安装包wget http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7.5 yum 安装与配置MySQL5.7.24">
+<meta property="og:url" content="http://wjymzh.github.io/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/index.html">
+<meta property="og:site_name" content="Zather">
+<meta property="og:description" content="安装环境：CentOS7 64位 MINI版，安装MySQL5.7 1、配置YUM源在MySQL官网中下载YUM源rpm安装包：https:&#x2F;&#x2F;dev.mysql.com&#x2F;downloads&#x2F;repo&#x2F;yum&#x2F; 下面已经提供一个YUM源安装包,如果不需要特定版本可直接使用我提供的5.7.24版本 12345# 下载mysql源安装包wget http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mys">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016222208865-1941834732.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1399677/201812/1399677-20181217113115052-1003364870.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016224550318-2074474803.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225411256-1320593264.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225818037-725171655.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225754677-1753029578.png">
+<meta property="article:published_time" content="2020-12-19T07:00:48.000Z">
+<meta property="article:modified_time" content="2020-12-19T07:15:31.750Z">
+<meta property="article:author" content="Zather">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="MySQL，数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016222208865-1941834732.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wjymzh.github.io/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Zather" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/wjymzh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Zather</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; security</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Nanjing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wjymzh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>享受代码~享受生活。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">MySQL，数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E9%80%9F/" rel="tag">加速</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" rel="tag">安全配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ES6/" style="font-size: 13px;">ES6</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 14px;">MySQL，数据库</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/XSS/" style="font-size: 13px;">XSS</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13px;">前端</a> <a href="/tags/%E5%8A%A0%E9%80%9F/" style="font-size: 13px;">加速</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 14px;">安全</a> <a href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" style="font-size: 13px;">安全配置</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 14px;">运维</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">74</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/%E5%BC%80%E5%90%AFMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90-%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" class="title">开启MySQL远程访问权限 允许远程连接</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T07:17:26.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/" class="title">CentOS7.5 yum 安装与配置MySQL5.7.24</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T07:00:48.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Github/">Github</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/Github%E5%8A%A0%E9%80%9F%E6%8C%87%E5%8D%97/" class="title">Github加速指南</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T06:11:37.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/17/SSH-sftp-%E5%91%BD%E4%BB%A4/" class="title">SSH sftp 命令</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-16T16:46:55.000Z" itemprop="datePublished">2020-12-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/17/SSH-rsync-%E5%91%BD%E4%BB%A4/" class="title">SSH rsync 命令</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-16T16:46:43.000Z" itemprop="datePublished">2020-12-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CentOS7-5-yum-安装与配置MySQL5-7-24" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS7.5 yum 安装与配置MySQL5.7.24
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/" class="article-date">
+	  <time datetime="2020-12-19T07:00:48.000Z" itemprop="datePublished">2020-12-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">MySQL，数据库</a>, <a class="article-tag-link-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>安装环境：CentOS7 64位 MINI版，安装MySQL5.7</p>
+<h1 id="1、配置YUM源"><a href="#1、配置YUM源" class="headerlink" title="1、配置YUM源"></a>1、配置YUM源</h1><p>在MySQL官网中下载YUM源rpm安装包：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/repo/yum/">https://dev.mysql.com/downloads/repo/yum/</a></p>
+<p>下面已经提供一个YUM源安装包,如果不需要特定版本可直接使用我提供的5.7.24版本<br><img src="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016222208865-1941834732.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载mysql源安装包</span></span><br><span class="line">wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装mysql源</span></span><br><span class="line">yum localinstall mysql57-community-release-el7-8.noarch.rpm</span><br></pre></td></tr></table></figure>
+<p>检查mysql源是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist enabled | grep <span class="string">&quot;mysql.*-community.*&quot;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img2018.cnblogs.com/blog/1399677/201812/1399677-20181217113115052-1003364870.png"><br>看到上图所示表示安装成功。</p>
+<h1 id="2、安装MySQL"><a href="#2、安装MySQL" class="headerlink" title="2、安装MySQL"></a>2、安装MySQL</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install mysql-community-server</span><br></pre></td></tr></table></figure>
+<h1 id="3、启动MySQL服务"><a href="#3、启动MySQL服务" class="headerlink" title="3、启动MySQL服务"></a>3、启动MySQL服务</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+<p>查看MySQL的启动状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+<p><img src="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016224550318-2074474803.png"></p>
+<h1 id="4、开机启动"><a href="#4、开机启动" class="headerlink" title="4、开机启动"></a>4、开机启动</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> mysqld</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<h1 id="5、修改root本地登录密码"><a href="#5、修改root本地登录密码" class="headerlink" title="5、修改root本地登录密码"></a>5、修改root本地登录密码</h1><p>mysql安装完成之后，在/var/log/mysqld.log文件中给root生成了一个默认密码。通过下面的方式找到root默认密码，然后登录mysql进行修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;temporary password&#x27;</span> /var/<span class="built_in">log</span>/mysqld.log</span><br></pre></td></tr></table></figure>
+<p><img src="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225411256-1320593264.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录</span></span><br><span class="line">mysql -u root -p</span><br><span class="line"><span class="comment"># 修改root密码</span></span><br><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;MyNewPass4!&#x27;</span>;</span><br><span class="line">或者</span><br><span class="line"><span class="built_in">set</span> password <span class="keyword">for</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>=password(<span class="string">&#x27;MyNewPass4!&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>注意：mysql5.7默认安装了密码安全检查插件（validate_password），默认密码检查策略要求密码必须包含：大小写字母、数字和特殊符号，并且长度不能少于8位。否则会提示ERROR 1819 (HY000): Your password does not satisfy the current policy requirements错误，如下图所示：<br><img src="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225818037-725171655.png"><br>通过msyql环境变量可以查看密码策略的相关信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like <span class="string">&#x27;%password%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://images2017.cnblogs.com/blog/1118473/201710/1118473-20171016225754677-1753029578.png"><br>官网密码策略详细说明：</p>
+<p><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html#sysvar_validate_password_policyMySQL">http://dev.mysql.com/doc/refman/5.7/en/validate-password-options-variables.html#sysvar_validate_password_policyMySQL</a></p>
+<h3 id="修改密码策略"><a href="#修改密码策略" class="headerlink" title="修改密码策略"></a>修改密码策略</h3><p>在/etc/my.cnf文件添加validate_password_policy配置，指定密码策略</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 选择0（LOW），1（MEDIUM），2（STRONG）其中一种，选择2需要提供密码字典文件</span></span><br><span class="line">validate_password_policy=0</span><br></pre></td></tr></table></figure>
+<p>如果不需要密码策略，添加my.cnf文件中添加如下配置禁用即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">validate_password = off</span><br></pre></td></tr></table></figure>
+<p>重新启动mysql服务使配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+<p>默认配置文件路径：</p>
+<p>配置文件：/etc/my.cnf<br>日志文件：/var/log//var/log/mysqld.log<br>服务启动脚本：/usr/lib/systemd/system/mysqld.service<br>socket文件：/var/run/mysqld/mysqld.pid</p>
+<h4 id="如果忘记root密码，则按如下操作恢复："><a href="#如果忘记root密码，则按如下操作恢复：" class="headerlink" title="如果忘记root密码，则按如下操作恢复："></a>如果忘记root密码，则按如下操作恢复：</h4><p>在[mysqld]的段中加上一句：skip-grant-tables 保存并且退出vi。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录</span></span><br><span class="line">mysql  -u root</span><br><span class="line"><span class="comment"># 修改密码</span></span><br><span class="line">update mysql.user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123qwe&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span> and Host = <span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">flush privileges</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wjymzh.github.io/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/" title="CentOS7.5 yum 安装与配置MySQL5.7.24" target="_blank" rel="external">http://wjymzh.github.io/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/wjymzh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/wjymzh" target="_blank"><span class="text-dark">Zather</span><small class="ml-1x">Web Developer &amp; security</small></a></h3>
+        <div>一个又菜有爱玩的码农、体育生、水族造景爱好者！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/12/19/%E5%BC%80%E5%90%AFMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90-%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" title="开启MySQL远程访问权限 允许远程连接"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/12/19/Github%E5%8A%A0%E9%80%9F%E6%8C%87%E5%8D%97/" title="Github加速指南"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wjymzh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
