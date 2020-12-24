@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>CentOS 7 安装 Nginx 配置反向代理 | Zather&#39;s Blog</title>
+  <meta name="description" content="CentOS 7 安装 Nginx 配置反向代理安装NginxLinux使用Nginx Yum存储库上安装Nginx，适用于Red Hat Enterprise Linux和CentOS系统。 1.添加设置Nginx Yum存储库在CentOS中首次安装Nginx时，需要添加Nginx软件包，使用以下命名，添加安装 1sudo yum install yum-utils 设置Yum存储库，创建&#x2F;e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7 安装 Nginx 配置反向代理">
+<meta property="og:url" content="http://wjymzh.github.io/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="Zather">
+<meta property="og:description" content="CentOS 7 安装 Nginx 配置反向代理安装NginxLinux使用Nginx Yum存储库上安装Nginx，适用于Red Hat Enterprise Linux和CentOS系统。 1.添加设置Nginx Yum存储库在CentOS中首次安装Nginx时，需要添加Nginx软件包，使用以下命名，添加安装 1sudo yum install yum-utils 设置Yum存储库，创建&#x2F;e">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1145599/201912/1145599-20191211164810188-1202195681.png">
+<meta property="article:published_time" content="2020-12-24T16:26:49.000Z">
+<meta property="article:modified_time" content="2020-12-24T16:28:47.343Z">
+<meta property="article:author" content="Zather">
+<meta property="article:tag" content="Ngix">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1145599/201912/1145599-20191211164810188-1202195681.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://wjymzh.github.io/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Zather" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/wjymzh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpeg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Zather</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; security</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Nanjing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wjymzh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>享受代码~享受生活。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ES6/">ES6</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Github/">Github</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSH/">SSH</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/" rel="tag">ES6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/" rel="tag">Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">MySQL，数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ngix/" rel="tag">Ngix</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SSH/" rel="tag">SSH</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A0%E9%80%9F/" rel="tag">加速</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" rel="tag">安全配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%EF%BC%8C%E5%8D%8F%E8%AE%AE/" rel="tag">安全，协议</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/ES6/" style="font-size: 13px;">ES6</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Github/" style="font-size: 13px;">Github</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Linux/" style="font-size: 13.33px;">Linux</a> <a href="/tags/MySQL%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 13.33px;">MySQL，数据库</a> <a href="/tags/Ngix/" style="font-size: 13px;">Ngix</a> <a href="/tags/SSH/" style="font-size: 13.33px;">SSH</a> <a href="/tags/Web/" style="font-size: 14px;">Web</a> <a href="/tags/XSS/" style="font-size: 13px;">XSS</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 13.33px;">前端</a> <a href="/tags/%E5%8A%A0%E9%80%9F/" style="font-size: 13px;">加速</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">安全</a> <a href="/tags/%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/" style="font-size: 13px;">安全配置</a> <a href="/tags/%E5%AE%89%E5%85%A8%EF%BC%8C%E5%8D%8F%E8%AE%AE/" style="font-size: 13.33px;">安全，协议</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 13px;">小程序</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 13.67px;">运维</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">76</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/">小程序</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/25/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="title">小程序生命周期</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-24T16:27:09.000Z" itemprop="datePublished">2020-12-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Nginx/">Nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="title">CentOS 7 安装 Nginx 配置反向代理</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-24T16:26:49.000Z" itemprop="datePublished">2020-12-25</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/%E5%BC%80%E5%90%AFMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90-%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" class="title">开启MySQL远程访问权限 允许远程连接</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T07:17:26.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/CentOS7-5-yum-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEMySQL5-7-24/" class="title">CentOS7.5 yum 安装与配置MySQL5.7.24</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T07:00:48.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Github/">Github</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/12/19/Github%E5%8A%A0%E9%80%9F%E6%8C%87%E5%8D%97/" class="title">Github加速指南</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-12-19T06:11:37.000Z" itemprop="datePublished">2020-12-19</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CentOS-7-安装-Nginx-配置反向代理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS 7 安装 Nginx 配置反向代理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" class="article-date">
+	  <time datetime="2020-12-24T16:26:49.000Z" itemprop="datePublished">2020-12-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Nginx/">Nginx</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="article-tag-link-link" href="/tags/Ngix/" rel="tag">Ngix</a>, <a class="article-tag-link-link" href="/tags/Web/" rel="tag">Web</a>, <a class="article-tag-link-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="CentOS-7-安装-Nginx-配置反向代理"><a href="#CentOS-7-安装-Nginx-配置反向代理" class="headerlink" title="CentOS 7 安装 Nginx 配置反向代理"></a>CentOS 7 安装 Nginx 配置反向代理</h1><h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><p>Linux使用Nginx Yum存储库上安装Nginx，适用于Red Hat Enterprise Linux和CentOS系统。</p>
+<h3 id="1-添加设置Nginx-Yum存储库"><a href="#1-添加设置Nginx-Yum存储库" class="headerlink" title="1.添加设置Nginx Yum存储库"></a>1.添加设置Nginx Yum存储库</h3><p>在CentOS中首次安装Nginx时，需要添加Nginx软件包，使用以下命名，添加安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure>
+<p>设置Yum存储库，创建/etc/yum.repos.d/nginx.repo配置文件，配置内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[nginx-stable]</span><br><span class="line">name&#x3D;nginx stable repo</span><br><span class="line">baseurl&#x3D;http:&#x2F;&#x2F;nginx.org&#x2F;packages&#x2F;centos&#x2F;$releasever&#x2F;$basearch&#x2F;</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">enabled&#x3D;1</span><br><span class="line">gpgkey&#x3D;https:&#x2F;&#x2F;nginx.org&#x2F;keys&#x2F;nginx_signing.key</span><br><span class="line">module_hotfixes&#x3D;true</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装Nginx"><a href="#2-安装Nginx" class="headerlink" title="2.安装Nginx"></a>2.安装Nginx</h3><p>通过以下命令安装Nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install nginx</span><br></pre></td></tr></table></figure>
+<h3 id="3、配置Nginx开机启动"><a href="#3、配置Nginx开机启动" class="headerlink" title="3、配置Nginx开机启动"></a>3、配置Nginx开机启动</h3><p>通过以下命令配置Nginx开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+<h3 id="4、启动Nginx服务"><a href="#4、启动Nginx服务" class="headerlink" title="4、启动Nginx服务"></a>4、启动Nginx服务</h3><p>通过以下命令启动Nginx服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<p>start 启动，stop 停止，restart 重启，reload 重新加载配置<br>启动后，在浏览器输入ip，显示下面页面，说明Nginx安装成功<img src="https://img2018.cnblogs.com/blog/1145599/201912/1145599-20191211164810188-1202195681.png"><br>注：先要确保80端口是通的<br>补充：</p>
+<ul>
+<li>nginx的配置文件在/etc/nginx/nginx.conf</li>
+<li>自定义的配置文件放在/etc/nginx/conf.d</li>
+<li>项目文件存放在/usr/share/nginx/html/</li>
+<li>日志文件存放在/var/log/nginx/</li>
+<li>还有一些其他的安装文件都在/etc/nginx<h3 id="5-访问不通解决方案"><a href="#5-访问不通解决方案" class="headerlink" title="5.访问不通解决方案"></a>5.访问不通解决方案</h3>检查防火墙：</li>
+<li>查看状态：systemctl status firewalld</li>
+<li>开启防火墙：systemctl start firewalld</li>
+<li>关闭防火墙：systemctl stop firewalld</li>
+<li>开启状态开放端口：firewall-cmd –permanent –zone=public –add-port=80/tcp<br>注：<br>–zone #作用域<br>–add-port=80/tcp #添加端口，格式为：端口/通讯协议<br>–permanent #永久生效，没有此参数重启后失效<br>重启防火墙：systemctl start firewalld.service<h3 id="6-配置Nginx解决CORS跨域问题"><a href="#6-配置Nginx解决CORS跨域问题" class="headerlink" title="6.配置Nginx解决CORS跨域问题"></a>6.配置Nginx解决CORS跨域问题</h3>  前后端分离遇到最多的问题就是跨域，跨域原理不说了，可以看之前的。这里直接上手。<br>  反向代理的原理就是讲前端的地址和后端的地址用nginx转发到同一个地址下，如5500端口和3000端口都转到3003端口下，具体配置如下：<br>  修改/etc/nginx/conf.d 下的配置文件。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> server &#123;</span><br><span class="line">        listen       8080;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">location /api/&#123;</span><br><span class="line">          proxy_pass http://62.234.15.248:8000/;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+将所有前端访问的含有/api/的内容都替换为<a target="_blank" rel="noopener" href="http://62.234.15.248:8000/">http://62.234.15.248:8000/</a> 。<br>改完以后，重启服务。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl reload nginx</span><br></pre></td></tr></table></figure>
+<h3 id="7-wget安装配置Nginx"><a href="#7-wget安装配置Nginx" class="headerlink" title="7.wget安装配置Nginx"></a>7.wget安装配置Nginx</h3></li>
+<li>1.wget <a target="_blank" rel="noopener" href="http://nginx.org/download/nginx-1.19.2.tar.gz">http://nginx.org/download/nginx-1.19.2.tar.gz</a>  #下载安装包</li>
+<li>2.tar -zxvf nginx-1.19.2.tar.gz   #解压</li>
+<li>3.yum install -y gcc gcc-c++ ncurses-devel perl pcre pcre-devel zlib gzip zlib-devel #安装依赖</li>
+<li>4.cd nginx-1.8.0     ./configure       make &amp;&amp; make install    #进入目录编译安装</li>
+<li>5.vi /usr/local/nginx/conf/nginx.conf。</li>
+<li>./nginx -s reload<br>结束。</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://wjymzh.github.io/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" title="CentOS 7 安装 Nginx 配置反向代理" target="_blank" rel="external">http://wjymzh.github.io/2020/12/25/CentOS-7-%E5%AE%89%E8%A3%85-Nginx-%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/wjymzh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpeg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/wjymzh" target="_blank"><span class="text-dark">Zather</span><small class="ml-1x">Web Developer &amp; security</small></a></h3>
+        <div>一个又菜有爱玩的码农、体育生、水族造景爱好者！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/12/25/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" title="小程序生命周期"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/12/19/%E5%BC%80%E5%90%AFMySQL%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90-%E5%85%81%E8%AE%B8%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" title="开启MySQL远程访问权限 允许远程连接"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/wjymzh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
