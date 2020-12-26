@@ -18,20 +18,26 @@
   
   
   <title>XSS总结 | Zather&#39;s Blog</title>
-  <meta name="description" content="简述常用的XSS攻击手段和目的">
+  <meta name="description" content="简述XSS全称是Cross Site Scripting即跨站脚本，当目标网站目标用户浏览器渲染HTML文档的过程中，出现了不被预期的脚本指令并执行时，XSS就发生了。xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，通过用户本地浏览器执行的，所以xss漏洞关键就是寻找参数未过滤的输出函数。常见的输出函数有： echo printf print print_r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS总结">
 <meta property="og:url" content="http://wjymzh.github.io/2020/12/16/XSS%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Zather">
-<meta property="og:description" content="简述常用的XSS攻击手段和目的">
+<meta property="og:description" content="简述XSS全称是Cross Site Scripting即跨站脚本，当目标网站目标用户浏览器渲染HTML文档的过程中，出现了不被预期的脚本指令并执行时，XSS就发生了。xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，通过用户本地浏览器执行的，所以xss漏洞关键就是寻找参数未过滤的输出函数。常见的输出函数有： echo printf print print_r">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6230889-834e76bc8c471138.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6230889-909939f59402f6b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1001">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6230889-4b3951ff10f4d8df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/446">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6230889-07ab49e8b1ea148a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1019">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6230889-75db875d30a09d1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500">
 <meta property="article:published_time" content="2020-12-16T15:26:33.000Z">
-<meta property="article:modified_time" content="2020-12-16T15:29:25.408Z">
+<meta property="article:modified_time" content="2020-12-26T16:50:18.677Z">
 <meta property="article:author" content="Zather">
 <meta property="article:tag" content="Web">
 <meta property="article:tag" content="XSS">
 <meta property="article:tag" content="安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6230889-834e76bc8c471138.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200">
   <!-- Canonical links -->
   <link rel="canonical" href="http://wjymzh.github.io/2020/12/16/XSS%E6%80%BB%E7%BB%93/index.html">
   
@@ -352,7 +358,48 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><h2 id="常用的XSS攻击手段和目的"><a href="#常用的XSS攻击手段和目的" class="headerlink" title="常用的XSS攻击手段和目的"></a>常用的XSS攻击手段和目的</h2>
+        <p><img src="https://upload-images.jianshu.io/upload_images/6230889-834e76bc8c471138.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200"></p>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>XSS全称是Cross Site Scripting即跨站脚本，当目标网站目标用户浏览器渲染HTML文档的过程中，出现了不被预期的脚本指令并执行时，XSS就发生了。<br>xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，通过用户本地浏览器执行的，所以xss漏洞关键就是寻找参数未过滤的输出函数。<br>常见的输出函数有： echo printf print print_r sprintf die var-dump var_export.</p>
+<h2 id="常用的XSS攻击手段和目的"><a href="#常用的XSS攻击手段和目的" class="headerlink" title="常用的XSS攻击手段和目的"></a>常用的XSS攻击手段和目的</h2><ul>
+<li>挂马</li>
+<li>盗取用户Cookie。</li>
+<li>DOS（拒绝服务）客户端浏览器。</li>
+<li>钓鱼攻击，高级的钓鱼技巧。</li>
+<li>删除目标文章、恶意篡改数据、嫁祸。</li>
+<li>劫持用户Web行为，甚至进一步渗透内网。</li>
+<li>爆发Web2.0蠕虫。</li>
+<li>蠕虫式的DDoS攻击。</li>
+<li>蠕虫式挂马攻击、刷广告、刷浏量、破坏网上数据</li>
+<li>其它安全问题<h2 id="xss-分类：（三类）"><a href="#xss-分类：（三类）" class="headerlink" title="xss 分类：（三类）"></a>xss 分类：（三类）</h2></li>
+<li>反射型XSS：&lt;非持久化&gt; 攻击者事先制作好攻击链接, 需要欺骗用户自己去点击链接才能触发XSS代码（服务器中没有这样的页面和内容），一般容易出现在搜索页面。</li>
+<li>存储型XSS：&lt;持久化&gt; 代码是存储在服务器中的，如在个人信息或发表文章等地方，加入代码，如果没有过滤或过滤不严，那么这些代码将储存到服务器中，每当有用户访问该页面的时候都会触发代码执行，这种XSS非常危险，容易造成蠕虫，大量盗窃cookie（虽然还有种DOM型XSS，但是也还是包括在存储型XSS内）。</li>
+<li>DOM型XSS：基于文档对象模型Document Objeet Model，DOM)的一种漏洞。DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行，如果DOM中的数据没有经过严格确认，就会产生DOM XSS漏洞。<h2 id="XSS-漏洞原理"><a href="#XSS-漏洞原理" class="headerlink" title="XSS 漏洞原理"></a>XSS 漏洞原理</h2><h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3>在黑盒测试中，这种类型比较容易通过漏洞扫描器直接发现，我们只需要按照扫描结果进行相应的验证就可以了。</li>
+</ul>
+<p>相对的在白盒审计中， 我们首先要寻找带参数的输出函数，接下来通过输出内容回溯到输入参数，观察是否过滤即可。<br>无案例不足以求真，这里我们选用echo()函数作为实例来分析：</p>
+<p>新建 XssReflex.php，代码如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt; </span><br><span class="line">&lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt; </span><br><span class="line">&lt;title&gt;XSS&lt;/title&gt; </span><br><span class="line">&lt;/head&gt; </span><br><span class="line">&lt;body&gt; </span><br><span class="line">&lt;form action=<span class="string">&quot;&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt; </span><br><span class="line">&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;input&quot;</span>&gt;     </span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span>&gt; </span><br><span class="line">&lt;/form&gt; </span><br><span class="line">&lt;br&gt; </span><br><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$XssReflex</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;input&#x27;</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;output:&lt;br&gt;&#x27;</span>.<span class="variable">$XssReflex</span>;</span><br><span class="line"><span class="meta">?&gt;</span> </span><br><span class="line">&lt;/body&gt; </span><br><span class="line">&lt;/html&gt; </span><br></pre></td></tr></table></figure>
+<p>这是一个很简单、也很常见的页面：<br>变量 $XssReflex 获取 get 方式传递的变量名为 input 的变量值（值为一个字符串），然后直接通过echo()函数输出，注意这中间并未对用户输入进行任何过滤。</p>
+<p>打开Firefox输入url：localhost/codeaudit/xss/XssReflex.php :<br>当我们输入 1 ，页面返回 1 :<br>当我们输入hello时，页面返回 hello :<br>以上都为正常的输出，但如果我们输出一些javascript代码呢？<br>比如我们输入<script>alert('xss')</script> ：<br><img src="https://upload-images.jianshu.io/upload_images/6230889-909939f59402f6b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1001"><br>可以看到浏览器成功弹窗，说明我们输出的JavaScript代码成功被执行了。<br>我们查看网页html代码：<br><img src="https://upload-images.jianshu.io/upload_images/6230889-4b3951ff10f4d8df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/446"><br>第12行增加了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(<span class="string">&#x27;xss&#x27;</span>)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>这个弹窗并没有什么实际的意义，但通过它我们知道输入javascript代码是可以被执行的，当我们输入一些其他函数，比如document.cookie就可以成功盗取用户的cookie信息，或者读取用户浏览器信息等，为我们进一步深入攻击做铺垫。</p>
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>和反射性XSS的即时响应相比，存储型XSS则需要先把利用代码保存在比如数据库或文件中，当web程序读取利用代码时再输出在页面上执行利用代码。但存储型XSS不用考虑绕过浏览器的过滤问题，屏蔽性也要好很多。<br>存储型XSS攻击流程：<br><img src="https://upload-images.jianshu.io/upload_images/6230889-07ab49e8b1ea148a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1019"><br>存储型XSS的白盒审计同样要寻找未过滤的输入点和未过滤的输出函数。</p>
+<p>使用cat命令查看 XssStorage.php 代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zather:~/ $ cat XssStorage.php</span><br></pre></td></tr></table></figure>
+<p>代码如下:&lt;参考自JackholeLiu的博客&gt;</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=<span class="string">&quot;font-size:18px;&quot;</span>&gt;&lt;meta http-equiv=<span class="string">&quot;Content-Type&quot;</span> content=<span class="string">&quot;text/html;charset=utf-8&quot;</span>/&gt;  </span><br><span class="line">&lt;html&gt;  </span><br><span class="line">&lt;head&gt;  </span><br><span class="line">&lt;title&gt;XssStorage&lt;/title&gt;  </span><br><span class="line">&lt;/head&gt;  </span><br><span class="line">&lt;body&gt;  </span><br><span class="line">&lt;h2&gt;Message Board&lt;h2&gt;  </span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;XssStorage.php&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;  </span><br><span class="line">Message:&lt;textarea id=<span class="string">&#x27;Mid&#x27;</span> name=<span class="string">&quot;desc&quot;</span>&gt;&lt;/textarea&gt;  </span><br><span class="line">&lt;br&gt;  </span><br><span class="line">&lt;br&gt;  </span><br><span class="line">Subuser:&lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;user&quot;</span>/&gt;&lt;br&gt; </span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;submit&quot;</span> onclick=<span class="string">&#x27;loction=&quot;XssStorage.php&quot;&#x27;</span>/&gt;  </span><br><span class="line">&lt;/form&gt;  </span><br><span class="line"><span class="meta">&lt;?php</span>  </span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;user&#x27;</span>])&amp;&amp;<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;desc&#x27;</span>]))&#123;  </span><br><span class="line"><span class="variable">$log</span>=fopen(<span class="string">&quot;sql.txt&quot;</span>,<span class="string">&quot;a&quot;</span>);  </span><br><span class="line">fwrite(<span class="variable">$log</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;user&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>);  </span><br><span class="line">fwrite(<span class="variable">$log</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;desc&#x27;</span>].<span class="string">&quot;\r\n&quot;</span>);  </span><br><span class="line">fclose(<span class="variable">$log</span>);  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span>(file_exists(<span class="string">&quot;sql.txt&quot;</span>))  </span><br><span class="line">&#123;  </span><br><span class="line"><span class="variable">$read</span>= fopen(<span class="string">&quot;sql.txt&quot;</span>,<span class="string">&#x27;r&#x27;</span>);  </span><br><span class="line"><span class="keyword">while</span>(!feof(<span class="variable">$read</span>))  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="keyword">echo</span> fgets(<span class="variable">$read</span>).<span class="string">&quot;&lt;/br&gt;&quot;</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">fclose(<span class="variable">$read</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="meta">?&gt;</span>  </span><br><span class="line">&lt;/body&gt;  </span><br><span class="line">&lt;/html&gt;&lt;/span&gt;  </span><br></pre></td></tr></table></figure>
+<h5 id="页面功能简述："><a href="#页面功能简述：" class="headerlink" title="页面功能简述："></a>页面功能简述：</h5><p>这个页面采用POST提交数据，生成、读取文本模拟数据库，提交数据之后页面会将数据写入sql.txt，再打开页面时会读取sql.txt中内容并显示在网页上，实现了存储型xss攻击模拟。<br>打开Firefox输入url：localhost/codeaudit/xss/XssStorage.php :<br>我们随意输出一些内容：<br><img src="https://upload-images.jianshu.io/upload_images/6230889-75db875d30a09d1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500"><br>以看到页面正常显示页面留言信息。<br>当我们在Message中输入<script>alert('xss')</script>时，页面成功弹窗 :<br>并且我们重启浏览器之后再加载该页面，页面依然会弹窗,这是因为恶意代码已经写入数据库中，每当有人访问该页面时，恶意代码就会被加载执行！<br>这就是所谓的存储型XSS漏洞，一次提交之后，每当有用户访问这个页面都会受到XSS攻击，危害巨大。</p>
+<h3 id="DOM-XSS"><a href="#DOM-XSS" class="headerlink" title="DOM XSS"></a>DOM XSS</h3><p>DOM型XSS和存储型、反射型XSS的区别：<br>DOM型XSS代码不需要服务器解释响应的直接参与，触发XSS只需要浏览器的DOM解析，完全是客户端的问题！！</p>
+<p>例子：<br><a target="_blank" rel="noopener" href="http://www.foo.com/xss.html%E7%9A%84%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B">http://www.foo.com/xss.html的代码如下</a>: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">eval</span>(location.hash.substr(<span class="number">1</span>));</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>触发XSS的一种方式如下:<br><a target="_blank" rel="noopener" href="http://www.foo.com/xss.html#alert(1)">http://www.foo.com/xss.html#alert(1)</a><br>这个URL显然不会发送到服务端，仅仅是在客户端被接收并解析执行！！</p>
+<p>常见的输入点：<br>document.URL<br>document.URLUnencoded<br>document.location<br>document.referrer<br>window.location<br>window.name<br>document.cookie<br>表单的值</p>
+<p>常见的输出点：</p>
+<p>1.常见输出HTMl内容<br>document.write(…)<br>document.body.innerHtml= …</p>
+<p>2.直接修改DOM树<br>document.create(…)<br>document.forms[0].action=…<br>document.body. …<br>window.attachEvent(…)</p>
+<p>3.替换document URL<br>document.location= …<br>document.location.hostname= …<br>document.location.replace(…)<br>document.URL= …<br>window.navigate(…)</p>
+<p>4.打开或修改新窗口<br>document.open(…)<br>window.open(…)<br>window.location.href= …</p>
+<p>5.直接执行脚本<br>eval(…)<br>window.execScript(…)<br>window.setInterval(…)<br>window.setTimeout(…) </p>
+
       
     </div>
     <div class="article-footer">
